@@ -1,0 +1,52 @@
+def calculate_simple_interest_rate(principal, interest_earned, time_years):
+    """
+    Calculates annual interest rate using Simple Interest formula.
+    R = (I / (P * T)) * 100
+    """
+    if principal <= 0 or time_years <= 0:
+        raise ValueError("Principal and time must be greater than zero.")
+    rate = (interest_earned / (principal * time_years)) * 100
+    return rate
+
+
+def calculate_compound_interest_rate(principal, final_amount, time_years):
+    """
+    Calculates annual compound interest rate.
+    A = P * (1 + r)^t  =>  r = (A / P)^(1/t) - 1
+    """
+    if principal <= 0 or time_years <= 0:
+        raise ValueError("Principal and time must be greater than zero.")
+    rate = (final_amount / principal) ** (1 / time_years) - 1
+    return rate * 100
+
+
+def main():
+    print("=== Annual Interest Rate Calculator ===")
+    print("1. Simple Interest")
+    print("2. Compound Interest")
+    
+    choice = input("Choose method (1 or 2): ").strip()
+    
+    try:
+        principal = float(input("Enter the principal amount: "))
+        time_years = float(input("Enter time in years: "))
+
+        if choice == '1':
+            interest_earned = float(input("Enter total interest earned: "))
+            rate = calculate_simple_interest_rate(principal, interest_earned, time_years)
+            print(f"\n➡️ Annual Simple Interest Rate: {rate:.2f}%")
+        
+        elif choice == '2':
+            final_amount = float(input("Enter the final amount after interest: "))
+            rate = calculate_compound_interest_rate(principal, final_amount, time_years)
+            print(f"\n➡️ Annual Compound Interest Rate: {rate:.2f}%")
+        
+        else:
+            print(" Invalid choice. Please select 1 or 2.")
+
+    except ValueError as e:
+        print(f" Error: {e}")
+
+
+if __name__ == "__main__":
+    main()
